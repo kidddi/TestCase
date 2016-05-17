@@ -9,11 +9,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import pageclasses.SearchPageFactory;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class TestSearchFactory {
     private WebDriver driver;
     private String baseUrl;
     SearchPageFactory searchPage;
+    static Logger log = Logger.getLogger(String.valueOf(TestSearchFactory.class));
 
 
 
@@ -26,6 +28,7 @@ public class TestSearchFactory {
         driver.get(baseUrl + "/");
         System.out.println("Site opened");
         searchPage = new SearchPageFactory(driver);
+
 
     }
 
