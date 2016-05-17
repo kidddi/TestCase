@@ -1,5 +1,6 @@
 package selenium;
 
+import methods.GetScreenshot;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,14 +36,17 @@ public class TestSearchFactory {
         Thread.sleep(2000);
         searchPage.setHotelDestination("Empire");
         searchPage.setHotelCheckin("12.12.2016");
+        searchPage.setHotelCheckout("");
         searchPage.setHotelCheckout("24.12.2016");
-        searchPage.clickSearchButton();
+        //searchPage.clickSearchButton();
     }
 
     @After
     public void tearDown() throws Exception {
         Thread.sleep(2000);
-        driver.quit();
+        GetScreenshot.getScreenshot(driver);
+        System.out.println("Thats good enohg!");
+        //driver.quit();
 
     }
 
