@@ -1,6 +1,8 @@
 package selenium;
 
 import methods.GetScreenshot;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import pageclasses.SearchPageFactory;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 public class TestSearchFactory {
     private WebDriver driver;
@@ -21,6 +22,7 @@ public class TestSearchFactory {
 
     @Before
     public void setUp() throws Exception {
+        PropertyConfigurator.configure("src\\main\\java\\log4j.properties");
         driver = new FirefoxDriver();
         baseUrl = "https://www.expedia.com";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -48,8 +50,9 @@ public class TestSearchFactory {
     public void tearDown() throws Exception {
         Thread.sleep(2000);
         GetScreenshot.getScreenshot(driver);
-        System.out.println("Thats good enohg!");
-        //driver.quit();
+        log.info("Thats good enohg!");
+        //System.out.println("Thats good enohg!");
+        driver.quit();
 
     }
 

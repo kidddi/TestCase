@@ -7,11 +7,14 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.io.IOException;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Александр on 17.05.2016.
  */
 public class GetScreenshot {
+
+    static Logger log = Logger.getLogger(String.valueOf(GetScreenshot.class));
 
     public static String getRundomString(int length) {
         StringBuilder sb = new StringBuilder();
@@ -21,12 +24,12 @@ public class GetScreenshot {
             int index = (int)(Math.random()*characters.length());
             sb.append(characters.charAt(index));
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
     public static void getScreenshot(WebDriver driver) throws IOException {
         String fileName = getRundomString(6) + ".png";
-        String directory = "C:\\Users\\1\\";
+        log.info("The filename is: " + fileName);
+        String directory = "D:\\1\\";
 
         File sourcefile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(sourcefile, new File(directory + fileName));

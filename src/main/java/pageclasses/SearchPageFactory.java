@@ -1,10 +1,13 @@
 package pageclasses;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import org.apache.log4j.Logger;
 
 /**
  * Created by energetic on 17.05.2016.
@@ -12,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 public class SearchPageFactory {
 
     WebDriver driver;
+    static Logger log = Logger.getLogger(String.valueOf(SearchPageFactory.class));
 
     @FindBy(id="tab-hotel-tab")
     WebElement hotelTab;
@@ -31,11 +35,13 @@ public class SearchPageFactory {
     public SearchPageFactory(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        log.info("Page created");
     }
 
     public void clickHotelTab(){
         driver.findElement(By.id("tab-hotel-tab")).click();
         hotelTab.click();
+        log.warn("Hotel Tab is clicked");
     }
 
     public void setHotelDestination(String destination){
@@ -47,6 +53,7 @@ public class SearchPageFactory {
     }
 
     public void setHotelCheckout(String checkout) {
+        hotelCheckout.clear();
         hotelCheckout.sendKeys(checkout);
     }
 
