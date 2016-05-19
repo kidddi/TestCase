@@ -1,0 +1,11 @@
+<suite name="TestSuite">
+    <test name="SeleniumFirstTest" preserve-order="true"/>
+    <classes>
+        <class name="selenium.TestngCase">
+            <methods>
+            <!--<include name="hotelBasicInfo"/> -->
+            <include name="hotelAdvansedInfo"/>
+            </methods>
+        </class>
+    </classes>
+</suite>

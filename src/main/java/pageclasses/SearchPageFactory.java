@@ -29,6 +29,13 @@ public class SearchPageFactory {
     @FindBy(id="hotel-checkout")
     WebElement hotelCheckout;
 
+    @FindBy(id="hotel-add-flight-checkbox")
+    WebElement addFlight;
+
+    @FindBy(id="hotel-flight-origin")
+    WebElement flightOrigin;
+
+
     @FindBy(id="search-button")
     WebElement searchButton;
 
@@ -39,9 +46,13 @@ public class SearchPageFactory {
     }
 
     public void clickHotelTab(){
-        driver.findElement(By.id("tab-hotel-tab")).click();
         hotelTab.click();
         log.warn("Hotel Tab is clicked");
+    }
+
+    public void clickAddFlight(){
+        addFlight.click();
+        log.warn("AddFlight is clicked");
     }
 
     public void setHotelDestination(String destination){
@@ -56,6 +67,11 @@ public class SearchPageFactory {
         hotelCheckout.clear();
         hotelCheckout.sendKeys(checkout);
     }
+
+    public void setFlight(String flight) {
+        flightOrigin.sendKeys(flight);
+    }
+
 
     public void clickSearchButton(){
         searchButton.click();;
