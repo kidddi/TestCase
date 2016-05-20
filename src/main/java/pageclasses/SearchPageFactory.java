@@ -70,10 +70,12 @@ public class SearchPageFactory {
 
     public void setFlight(String flight) {
         flightOrigin.sendKeys(flight);
+        log.warn("Dallas is added");
     }
 
 
     public void clickSearchButton(){
-        searchButton.click();;
+        searchButton.click();
+        log.warn("SearchButton is clicked");
     }
 }
