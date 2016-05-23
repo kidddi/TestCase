@@ -4,6 +4,7 @@ import methods.GetScreenshot;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -23,18 +24,20 @@ public class TestngCase {
     private String baseUrl;
     SearchPageFactory searchPage;
     static Logger log = Logger.getLogger(String.valueOf(TestSearchFactory.class));
+    public WebDriver getDriver(){
+        return driver;
+    }
+
 
 
     @BeforeClass
     public void setUp() throws Exception {
         PropertyConfigurator.configure("src\\main\\java\\log4j.properties");
-        log.info("BeforeTest started");
         driver = new FirefoxDriver();
         baseUrl = "https://www.expedia.com";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(baseUrl + "/");
-        System.out.println("Site opened");
         searchPage = new SearchPageFactory(driver);
 
     }
@@ -57,7 +60,7 @@ public class TestngCase {
         log.info("This is test 2");
         searchPage.clickAddFlight();
         searchPage.setFlight("Dallas");
-        searchPage.clickSearchButton();
+        //searchPage.clickSearchButton();
     }
 
     @AfterMethod
@@ -68,7 +71,8 @@ public class TestngCase {
 
     @AfterClass
     public void tearDown() throws Exception {
-        Thread.sleep(2000);
+        Thread.sleep(8000);
         //log.info("Thats good enohg!");
+        driver.quit();
     }
 }

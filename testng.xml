@@ -1,4 +1,7 @@
 <suite name="TestSuite">
+    <listeners>
+        <listener class-name="methods.Listeners"/>
+    </listeners>
     <test name="SeleniumFirstTest" preserve-order="true">
     <classes>
        <class name="selenium.TestngCase">
