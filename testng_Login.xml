@@ -1,0 +1,9 @@
+<suite name="TestSuite_Login">
+
+    <test name="SeleniumFirstTest">
+        <classes>
+            <class name="ua.olx.login.TestNG_TestSuite"></class>
+            <class name="selenium.TestngCase"></class>
+        </classes>
+    </test>
+</suite>

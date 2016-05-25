@@ -26,13 +26,22 @@ public class GetScreenshot {
         }
         return sb.toString();
     }
-    public static void getScreenshot(WebDriver driver) throws IOException {
-        String fileName = getRundomString(6) + ".png";
+    public static String getScreenshot(WebDriver driver, String name) throws IOException {
+        String fileName = name + ".png";
         log.info("The filename is: " + fileName);
         String directory = "D:\\1\\";
 
         File sourcefile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(sourcefile, new File(directory + fileName));
+        return directory + fileName;
+    }
+    public static String getScreenshot(WebDriver driver) throws IOException {
+        String fileName = getRundomString(8) + ".png";
+        log.info("The filename is: " + fileName);
+        String directory = "D:\\1\\";
 
+        File sourcefile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(sourcefile, new File(directory + fileName));
+        return directory + fileName;
     }
 }
