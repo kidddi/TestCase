@@ -1,6 +1,6 @@
 package selenium;
 
-import methods.GetScreenshot;
+import utilites.GetScreenshot;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import org.junit.After;

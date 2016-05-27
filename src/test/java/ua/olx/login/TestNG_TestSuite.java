@@ -3,21 +3,22 @@ package ua.olx.login;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import datadriven.ExcelUtilities;
 import extentreports.ExtentFactory;
-import methods.GetScreenshot;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageclasses.ProfilePage;
+import utilites.Constans;
+import utilites.GetScreenshot;
 
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,17 +29,20 @@ public class TestNG_TestSuite {
     private String baseUrl;
     ProfilePage profilePage;
 
+    static Logger log = Logger.getLogger(String.valueOf(TestNG_TestSuite.class));
+
     ExtentReports report;
     ExtentTest test;
 
     @BeforeClass
     public void setUp() throws Exception {
+        PropertyConfigurator.configure("log4j.properties");
         report = ExtentFactory.getInstance();
         test = report.startTest("Verify");
         driver = new FirefoxDriver();
         test.log(LogStatus.INFO, "Browser started");
 
-        baseUrl = "https://www.olx.ua";
+        baseUrl = Constans.URL;
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         test.log(LogStatus.INFO, "Browser maximized");
@@ -47,6 +51,13 @@ public class TestNG_TestSuite {
         test.log(LogStatus.INFO, "Web Application added");
 
         profilePage = new ProfilePage(driver);
+        ExcelUtilities.setExcelFile(Constans.path, "Sheet1");
+    }
+
+    @DataProvider (name = "loginData")
+    public Object[][] dataProvider(){
+        Object[][] testData = ExcelUtilities.getTestData("Invalid_Login");
+        return testData;
     }
 
     @Test
@@ -100,6 +111,35 @@ public class TestNG_TestSuite {
         Assert.assertTrue(welcomeText != null);
         test.log(LogStatus.PASS, "Verified Welcome test");
 
+
+    }
+
+    @Test(dataProvider = "loginData")
+    public void testExcelData(String username, String password) throws Exception {
+        profilePage.clickLoginLink();
+        test.log(LogStatus.INFO, "Logn link clicked");
+
+        profilePage.setUserEmail(username);
+        test.log(LogStatus.INFO, "UserEmail is set");
+
+        profilePage.setUserPass(password);
+        test.log(LogStatus.INFO, "UserPass is set");
+
+        profilePage.clickLiginButton();
+        test.log(LogStatus.INFO, "LoginButton clicked");
+        Thread.sleep(2000);
+
+       /* boolean invalidLogin = driver.findElements(By.xpath("//div[@class='errorboxContainer']")) != null;
+        Assert.assertTrue(invalidLogin);
+        test.log(LogStatus.PASS, "InvalidLogin Passed");*/
+        WebElement welcomeText = null;
+        try{
+            welcomeText = driver.findElement(By.xpath("//span[@class='link inlblk']//strong[text()='kidyuk']"));
+        }catch (NoSuchElementException e){
+            System.out.println(e.getMessage());
+        }
+        Assert.assertFalse(welcomeText != null);
+        test.log(LogStatus.PASS, "Verified Welcome test");
 
     }
 

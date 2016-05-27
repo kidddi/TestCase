@@ -2,8 +2,12 @@
 
     <test name="SeleniumFirstTest">
         <classes>
-            <class name="ua.olx.login.TestNG_TestSuite"></class>
-            <class name="selenium.TestngCase"></class>
+            <class name="ua.olx.login.TestNG_TestSuite">
+                <methods>
+                    <include name = "testExcelData"/>
+                </methods>
+            </class>
+            <!--<class name="selenium.TestngCase"></class>-->
         </classes>
     </test>
 </suite>

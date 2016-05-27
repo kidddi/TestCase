@@ -1,6 +1,6 @@
 <suite name="TestSuite">
     <listeners>
-        <listener class-name="methods.Listeners"/>
+        <listener class-name="utilites.Listeners"/>
     </listeners>
     <test name="SeleniumFirstTest" preserve-order="true">
     <classes>
