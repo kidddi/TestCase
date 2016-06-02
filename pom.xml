@@ -54,7 +54,7 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>Test One</id>
+            <id>TestOne</id>
             <build>
                 <plugins>
                     <plugin>
@@ -71,7 +71,7 @@
             </build>
         </profile>
         <profile>
-            <id>Test Login</id>
+            <id>TestLogin</id>
             <build>
                 <plugins>
                     <plugin>

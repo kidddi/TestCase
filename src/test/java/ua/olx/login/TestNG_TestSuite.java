@@ -114,7 +114,7 @@ public class TestNG_TestSuite {
 
     }
 
-    @Test(dataProvider = "loginData")
+   @Test(dataProvider = "loginData")
     public void testExcelData(String username, String password) throws Exception {
         profilePage.clickLoginLink();
         test.log(LogStatus.INFO, "Logn link clicked");
@@ -129,9 +129,7 @@ public class TestNG_TestSuite {
         test.log(LogStatus.INFO, "LoginButton clicked");
         Thread.sleep(2000);
 
-       /* boolean invalidLogin = driver.findElements(By.xpath("//div[@class='errorboxContainer']")) != null;
-        Assert.assertTrue(invalidLogin);
-        test.log(LogStatus.PASS, "InvalidLogin Passed");*/
+
         WebElement welcomeText = null;
         try{
             welcomeText = driver.findElement(By.xpath("//span[@class='link inlblk']//strong[text()='kidyuk']"));
